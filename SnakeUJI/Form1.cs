@@ -19,13 +19,15 @@ namespace SnakeUJI
         //private Comida comida;
 
 
-        public static Keys arriba = Keys.Up;
-        public static  Keys abajo = Keys.Down;
-        public static Keys izquierda = Keys.Left;
-        public static Keys derecha = Keys.Right;
-
-
-
+        public const Keys arriba = Keys.Up;
+        public const Keys abajo = Keys.Down;
+        public const Keys izquierda = Keys.Left;
+        public const Keys derecha = Keys.Right;
+        
+        
+        Snake serpiente = new Snake(); // Aquí se crea
+        Comidas comida = new Comidas();
+        Marcadores marcador = new Marcadores();
 
         public Form1()
         {
@@ -38,12 +40,12 @@ namespace SnakeUJI
             this.Width = anchoEscenario;
             this.Height = altoEscenario;
             this.BackColor = Color.LawnGreen;
-            Snake serpiente = new Snake(); // Aquí se crea
+            
             Controls.Add(serpiente.cab.picturebox);
             Controls.Add(serpiente.cola[0].picturebox);// Aquí se añade a Controls
-            Comidas comida = new Comidas();
+            
             Controls.Add(comida.bocados[0].pic);
-            Marcadores marcador = new Marcadores();
+            
             Controls.Add(marcador.miLabel);
             marcador.miLabel.SendToBack();
             
@@ -58,14 +60,49 @@ namespace SnakeUJI
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            /*switch (e.KeyCode)
+            string lastmove = "";
+
+
+            switch (e.KeyCode)
             {
-                case arriba: arriba+= 1;                                // aquí escribimos que queremos que haga en este caso
-	            case abajo: abajo += 1;                                // aquí escribimos que queremos que haga en este caso
-	            case izquierda: izquierda += 1;                         // aquí escribimos que queremos que haga en este caso
-	            case derecha: derecha += 1;                             // aquí escribimos que queremos que haga en este caso
-	            default:
-            }*/
+                case arriba:
+                    if (lastmove != "arriba")
+                    {
+                        serpiente.giro.Add(new Giro(arriba, serpiente.cab.picturebox.Location.X, serpiente.cab.picturebox.Location.Y));
+                    }
+                    lastmove = "arriba";
+                    break;
+
+
+	            case abajo:
+                    if (lastmove != "abajo")
+                    {
+                        serpiente.giro.Add(new Giro(abajo, serpiente.cab.picturebox.Location.X, serpiente.cab.picturebox.Location.Y));
+                    }
+                    lastmove = "abajo";
+                    break;
+
+
+	            case izquierda:
+                    if (lastmove != "izquierda")
+                    {
+                        serpiente.giro.Add(new Giro(izquierda, serpiente.cab.picturebox.Location.X, serpiente.cab.picturebox.Location.Y));
+                    }
+                    lastmove = "izquierda";
+                    break;
+
+
+	            case derecha: 
+                    
+                    if (lastmove != "derecha") {
+                        serpiente.giro.Add(new Giro(derecha, serpiente.cab.picturebox.Location.X, serpiente.cab.picturebox.Location.Y));
+                    }
+                    lastmove = "derecha";                        
+                    break;
+
+
+	            
+            }
 
         }
 
