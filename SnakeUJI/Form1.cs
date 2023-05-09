@@ -39,11 +39,12 @@ namespace SnakeUJI
             this.Height = altoEscenario;
             this.BackColor = Color.LawnGreen;
             Snake serpiente = new Snake(); // Aquí se crea
-            Controls.Add(serpiente.picturebox); // Aquí se añade a Controls
+            Controls.Add(serpiente.cab.picturebox);
+            Controls.Add(serpiente.cola[0].picturebox);// Aquí se añade a Controls
             Comidas comida = new Comidas();
-            Controls.Add(comida.MiPictureBox);
+            Controls.Add(comida.bocados[0].pic);
             Marcadores marcador = new Marcadores();
-            Controls.Add(marcador.MiLabel);
+            Controls.Add(marcador.miLabel);
             marcador.miLabel.SendToBack();
             
             // Aquí pueden venir más acciones iniciales …
