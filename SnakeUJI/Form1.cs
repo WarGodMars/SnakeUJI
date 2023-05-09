@@ -53,9 +53,21 @@ namespace SnakeUJI
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void FinishGame()
         {
+            if (serpiente.cab.picturebox.Location.X<0 | serpiente.cab.picturebox.Location.X > 735 | serpiente.cab.picturebox.Location.Y < 0 | serpiente.cab.picturebox.Location.Y > 500)
+            {
+                this.Close();
+            }
 
+            for(int i=0; i< serpiente.cola.Count; i++)
+            {
+                if (serpiente.cab.picturebox.Bounds.IntersectsWith(serpiente.cola[i].picturebox.Bounds))
+                {
+                    this.Close();
+                }
+            }
+                
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -105,7 +117,21 @@ namespace SnakeUJI
             }
 
         }
-
         
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            serpiente.Draw();
+            serpiente.NuevoCola();
+            serpiente.Cambio_POS_Cabeza();
+            serpiente.Giro();
+            comida.Refresher();
+            FinishGame();
+            this.Invalidate();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
